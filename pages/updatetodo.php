@@ -37,9 +37,6 @@
         exit;
     }
 
-  
-
-
 ?>
 <!
 doctype html>
@@ -65,8 +62,10 @@ doctype html>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     </head>
 
-    <body class="container">
-        <header class="mt-4">
+    <body>
+         <?php include '../includes/header.php' ?>
+        <div class="container min-vh-100">
+                <header class="mt-4">
             <div class="d-flex align-items-center justify-content-evenly">
                 <div class="d-flex align-items-center justify-content-center">
                      <h1 class=" me-2">Todo List </h1>
@@ -85,7 +84,7 @@ doctype html>
               <div class="col-10 col-md-10 col-lg-6 text-center alert alert-success my-3"><?php echo $_GET['result'] ?></div>
             </div>
             <?php endif;?>
-            <form method="post" action="../controller/UpdateTodo.php">
+            <form method="POST" action="../controller/UpdateTodo.php">
                 <div class="row justify-content-center  my-3">
                     <div class="col-md-10 col-lg-6 text-center">
                         <div class="row align-items-center g-2 g-lg-1">
@@ -105,8 +104,11 @@ doctype html>
                 </div>
             </form>
         </main>
-        <footer>
+        </div>
+    
+         <footer>
             <!-- place footer here -->
+            <?php include '../includes/footer.php' ?>
         </footer>
         <script src="../Asset/js/script.js"></script>
         <!-- Bootstrap JavaScript Libraries -->

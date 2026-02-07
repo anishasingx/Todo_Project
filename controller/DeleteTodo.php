@@ -1,24 +1,30 @@
 <?php
   require '../config/db.php';
-
-  if((isset($_GET['id'])))
+  session_start();
+  if((isset($_GET['id'])) && isset($_SESSION['username']))
   {
     try
     {
       $id = $_GET['id'];
+      $username = $_SESSION['username'];
       // SQL to delete a record
-      $sql = "DELETE FROM todo WHERE id=?";
-      $stmt = $conn->prepare($sql);
-      $stmt->execute([$id]);
-      $stmt = null;
+      $sql = "DELETE FROM todo WHERE id=? and username=?";
 
-     header("Location: ../index.php?result=Todo deleted Successfully.");
+       $stmt = $conn->prepare($sql);
+      $stmt->execute([$id, $username]);
+      
+      if($stmt->rowCount() > 0)
+      {
+        header("Location: ../index.php?result=Todo deleted Successfully.");
         exit;
+      }
+      header("Location: ../index.php?result=Restricted Activity Detected.");
+      exit;
     }
      catch(PDOException $e)
     {
-     header("Location: ../index.php?result=Todo Deletion Failed.");
-        exit;
+      header("Location: ../index.php?result=Todo Deletion Failed.");
+      exit;
     }
   }
 ?>
